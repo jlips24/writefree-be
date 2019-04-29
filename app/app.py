@@ -23,8 +23,8 @@ from flask_jwt_extended import (
 
 # initializations
 # mongo live server address
-db_address = 'mongodb+srv://writefree_test:Il7hyiodq6WFQ32T@writefree-mgdru.gcp.mongodb.net/test?retryWrites=true'
-#mongodb://localhost:27017/
+##db_address = 'mongodb+srv://writefree_test:Il7hyiodq6WFQ32T@writefree-mgdru.gcp.mongodb.net/test?retryWrites=true'
+db_address = 'localhost:27017'
 app = Flask(__name__)
 CORS(app)
 app.secret_key = 'super secret key'
@@ -260,13 +260,12 @@ def fetchNote(note_id):
 
 @app.route ('/renderPDF', methods= ['GET'])
 def renderPDF():
-    print("HERE", request.args['noteHTML'])
-    #form_data = json.loads(request.get_data())
+
     noteHTML = request.args['noteHTML']
     noteID = request.args['noteID']
-    print(noteID)
-    print(noteHTML)
+
     response = control.render_PDF(noteID, noteHTML)
+    
     return response
 
 @app.route ('/change-word-spacing', methods= ['POST', 'OPTIONS'])
